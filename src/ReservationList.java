@@ -9,11 +9,10 @@ public class ReservationList {
     ReservationList() {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 
-        //displayReservations();
         while(true) {
-            System.out.println("");
+            System.out.println(""); // Better way to do this?
             System.out.println("Press one to make a reservation, two to print out current reservations, three to delete a reservation,");
-            System.out.println("and four to change the size of a reservation. Press five to view all reservations.");
+            System.out.println("and four to change the size of a reservation.");
             int choice = myObj.nextInt();
             switch(choice) {
                 case 1:
@@ -24,7 +23,9 @@ public class ReservationList {
                     int timeReserving = myObj.nextInt();
                     System.out.println("Enter the time of the reservation");
                     int timeFor = myObj.nextInt();
-                    addReservation(groupSize, timeReserving, timeFor);
+                    System.out.println("Enter the name for the reservation");
+                    String name = myObj.next();
+                    addReservation(groupSize, timeReserving, timeFor, name);
                     System.out.println("Done!");
                     if(reservations.size() > 1) {
                         sortReservations();
@@ -55,20 +56,20 @@ public class ReservationList {
 
                 default:
                     System.out.println("Invalid Input!");
-
             }
 
         }
     }
 
     public static void main(String[] args) {
+        // Starts the whole program w this, right?
         ReservationList obj = new ReservationList();
     }
 
-    public void addReservation(int numpeople, int timemade, int timefor) {
-            reservations.add(new Reservation(numpeople, timemade, timefor));
+    public void addReservation(int numpeople, int timemade, int timefor, String Name) {
+        // simple adding reservaition
+        reservations.add(new Reservation(numpeople, timemade, timefor, Name));
     }
-
     public void displayReservations() {
         System.out.println("Printing all reservations:");
         int count = 1;
@@ -98,7 +99,6 @@ public class ReservationList {
 
     public void deleteReservation(int index) {
         reservations.remove(index);
-
     }
 
     public void changeGroupSize(int index, int changeTo){
